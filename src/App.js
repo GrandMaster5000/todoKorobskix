@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from 'react';
+import {get} from './api';
+import AppDrawer from './components/AppDrawer';
+import AppContent from './components/AppContent';
 
-function App() {
+import './App.scss';
+
+
+
+export default function App() {
+  const [lists , setLists] = useState([]);
+  const [todos , setTodos] = useState([]);
+
+
+  useEffect(() => {
+    get('todos')
+    .then(setTodos);
+    
+    get('lists')
+    .then(setLists);
+  }, [])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='app'>
+      <AppDrawer lists={lists}/>
+
+      <AppContent>
+          <ul>
+              {todos.map(t => (
+                  <li key={t.id}>{t.title}</li>
+              ))}
+              
+          </ul>
+      </AppContent>
     </div>
   );
 }
 
-export default App;
