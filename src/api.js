@@ -11,7 +11,6 @@ export function get(collectionName) {
         id: doc.id,
         ...doc.data()
       }));
-
       return items;
     })
     .catch(error => {
