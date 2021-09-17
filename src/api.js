@@ -1,14 +1,21 @@
 import {db} from './firebase';
-import { collection, query, getDocs } from "firebase/firestore";
 
-export async function get(coll) {
-    const req = query(collection(db, coll));
+export function get(collectionName) {
+  const collection = db.collection(collectionName);
 
-    const snapshot = await getDocs(req);
-    const data = snapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
-    }));
-    
-    return data;
+  return (query = () => collection) => {
+    return query(collection)
+    .get()
+    .then(snapshot => {
+      const items = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+
+      return items;
+    })
+    .catch(error => {
+      console.log("error:" , error);
+    })
+  }
 }

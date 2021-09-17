@@ -12,13 +12,14 @@ import {
     ListDivider,
     Icon
 } from 'mdc-react';
+import { NavLink } from 'react-router-dom';
 import './AppDrow.scss';
 
 
 const AppDrawer = ({lists}) => {
     return (
         
-        <Drawer class="mdc-drawer">
+        <Drawer className="mdc-drawer">
             <DrawerHeader
                 title='Korobskix Todo'
             />
@@ -27,18 +28,22 @@ const AppDrawer = ({lists}) => {
                 <ListGroup>
                     <List>
                         {[
-                            {title: 'Задачи', icon: 'home'},
-                            {title: 'Важно', icon: 'star'},
+                            {title: 'Задачи', icon: 'home', to: '/'},
+                            {title: 'Важно', icon: 'star', to: '/'},
                         ].map(i => (
-                            <ListItem key={i.title}>
-                            <ListItemGraphic>
-                                <Icon>{i.icon}</Icon>
-                            </ListItemGraphic>
+                            <ListItem 
+                            key={i.title}
+                            component={NavLink}
+                            to={i.to}
+                            >
+                                <ListItemGraphic>
+                                    <Icon>{i.icon}</Icon>
+                                </ListItemGraphic>
 
-                            <ListItemText>
-                                {i.title}
-                            </ListItemText>
-                        </ListItem>
+                                <ListItemText>
+                                    {i.title}
+                                </ListItemText>
+                            </ListItem>
                         ))}
                     </List>
 
@@ -46,15 +51,19 @@ const AppDrawer = ({lists}) => {
 
                     <List>
                         {lists.map(i => (
-                            <ListItem key={i.title}>
-                            <ListItemGraphic>
-                                <Icon>list</Icon>
-                            </ListItemGraphic>
+                            <ListItem 
+                            key={i.id}
+                            component={NavLink}
+                            to={i.id}
+                            >
+                                <ListItemGraphic>
+                                    <Icon>list</Icon>
+                                </ListItemGraphic>
 
-                            <ListItemText>
-                                {i.title}
-                            </ListItemText>
-                        </ListItem>
+                                <ListItemText>
+                                    {i.title}
+                                </ListItemText>
+                            </ListItem>
                         ))}
                     </List>
                 </ListGroup>
