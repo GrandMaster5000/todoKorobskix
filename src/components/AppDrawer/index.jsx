@@ -28,13 +28,16 @@ const AppDrawer = ({lists}) => {
                 <ListGroup>
                     <List>
                         {[
-                            {title: 'Задачи', icon: 'home', to: '/'},
-                            {title: 'Важно', icon: 'star', to: '/'},
+                            {title: 'Задачи', icon: 'home', to: '/', exact: true},
+                            {title: 'Важно', icon: 'star', to: '/important'},
+                            { title: 'Запланированные', icon: 'event', to: '/planned' }
                         ].map(i => (
                             <ListItem 
                             key={i.title}
                             component={NavLink}
                             to={i.to}
+                            exact={i.exact}
+                            activeClassName="mdc-list-item--activated"
                             >
                                 <ListItemGraphic>
                                     <Icon>{i.icon}</Icon>
@@ -55,6 +58,7 @@ const AppDrawer = ({lists}) => {
                             key={i.id}
                             component={NavLink}
                             to={i.id}
+                            activeClassName="mdc-list-item--activated"
                             >
                                 <ListItemGraphic>
                                     <Icon>list</Icon>

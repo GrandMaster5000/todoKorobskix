@@ -1,0 +1,21 @@
+.todo-list-item {
+    padding: 10px !important; 
+    background-color: white;
+    margin-top: 2px;
+    position: relative;
+    margin-left: 0;
+    margin-right: 0;
+
+    .mdc-list-item__graphic {
+        width: 18px;
+        margin-right: 1rem;
+    }
+
+    .mdc-list-item__text {
+        flex: 1;
+    }
+
+    .mdc-checkbox{
+        top: -8px;
+    }
+}

@@ -3,15 +3,12 @@ import {
     ListItem, ListItemGraphic, ListItemText,
     Checkbox
 } from 'mdc-react'
+import './index.scss';
 
 
 const TodoListItem = ({todo, onCompleteChange}) => {
-
-
-    
-    console.log(todo);
     return (
-        <ListItem>
+        <ListItem className="todo-list-item">
             <ListItemGraphic>
                 <Checkbox 
                 checked={todo.completed}

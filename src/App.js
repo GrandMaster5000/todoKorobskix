@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import { Switch, Route } from 'react-router';
 
-import {get} from './api';
+import {getList} from './api';
 import DBContext from './context/db';
 
 import AppDrawer from './components/AppDrawer';
 import AppContent from './components/AppContent';
-import TodoList from './components/TodoList';
+import ListPage from './pages/List';
 
 import './App.scss';
 
@@ -15,19 +15,19 @@ import './App.scss';
 export default function App() {
   const [lists , setLists] = useState([]);
 
-
   useEffect(() => {
-    get('lists')()
+    getList()
     .then(setLists);
   }, [])
+
   return (
-    <DBContext.Provider value={{lists, get}}>
+    <DBContext.Provider value={{lists}}>
       <div className='app'>
         <AppDrawer lists={lists}/>
 
         <AppContent>
             <Switch>
-              <Route path='/:listId' component={TodoList}/>
+              <Route path='/:listId' component={ListPage}/>
             </Switch>
         </AppContent>
       </div>

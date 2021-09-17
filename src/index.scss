@@ -14,8 +14,19 @@ body {
     min-height: 100vh;
 }
 
-#app-content {
-    width: 100%;
+
+.mdc-list-item {
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.mdc-list-group {
+    padding: 0 10px;
+}
+
+.mdc-list-item--activated {
+    color: rgb(85, 26, 139) !important;
 }
 
 $gray: #767678;
+

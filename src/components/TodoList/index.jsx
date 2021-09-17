@@ -1,28 +1,13 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React from 'react';
 import {
     Typography,
-    List,
-    Spinner
+    List
 } from 'mdc-react'
-import DBContext from '../../context/db';
 import TodoListItem from '../TodoListItem';
 import './TodoList.scss';
 
 
-const TodoList = ({match}) => {
-    const [todos , setTodos] = useState([]);
-
-    const db = useContext(DBContext);
-    const list = db.lists.find(list => list.id === match.params.listId);
-    
-    useEffect(() => {
-        db.get('todos')(collection => 
-            collection.where('listId', '==', match.params.listId))
-        .then(setTodos);
-
-    }, [db, match.params.listId])
-
-    
+const TodoList = ({list, todos}) => {
     return (
         <div className='todo-list'>
             <Typography 
