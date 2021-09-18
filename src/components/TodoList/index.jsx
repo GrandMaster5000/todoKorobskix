@@ -7,7 +7,7 @@ import TodoListItem from '../TodoListItem';
 import './TodoList.scss';
 
 
-const TodoList = ({list, todos}) => {
+const TodoList = ({list, todos, onDelete}) => {
     return (
         <div className='todo-list'>
             <Typography 
@@ -20,6 +20,7 @@ const TodoList = ({list, todos}) => {
                     <TodoListItem 
                     key={t.id}
                     todo={t}
+                    onDelete={onDelete}
                     />
                 ))}
             </List>

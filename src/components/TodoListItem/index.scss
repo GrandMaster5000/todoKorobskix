@@ -12,10 +12,19 @@
     }
 
     .mdc-list-item__text {
+        display: flex;
+        align-items: center;
         flex: 1;
     }
 
     .mdc-checkbox{
-        top: -8px;
+        top: 4px;
+    }
+
+    .list-item-icon {
+        transition: .3s all;
+    }
+    .meta-list:hover .list-item-icon {
+        color: #842029;
     }
 }
