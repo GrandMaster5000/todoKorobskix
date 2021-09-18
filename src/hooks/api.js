@@ -33,6 +33,14 @@ export default function useApi() {
             })
     }
 
+    const updateTodo = (todoId, data) => {
+        return api.updateTodo(todoId, data)
+            .then(data => {
+                setTodos([...todos.map(t => t.id !== todoId ? ({...t, ...data})
+                : t)]);
+            });
+    }
+
     return {
         data: {
             lists,
@@ -42,7 +50,8 @@ export default function useApi() {
             getLists,
             getListTodos,
             createTodo,
-            deleteTodo
+            deleteTodo,
+            updateTodo
         }
     };
 }

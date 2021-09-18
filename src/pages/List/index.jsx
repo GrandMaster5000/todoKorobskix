@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import Spinner from '../../components/Spinner';
 import TodoList from '../../components/TodoList';
 import TodoForm from '../../components/TodoForm';
-import useApi from '../../hooks/db';
+import useApi from '../../hooks/api';
 import './index.scss';
 
 
@@ -25,6 +25,10 @@ const ListPage = ({ match }) => {
         actions.deleteTodo(todoId);
     };
 
+    const handleUpdate = (todoId, data) => {
+        actions.updateTodo(todoId, data);
+    }
+
     if(!list || !todos) return <Spinner/>
 
     return (
@@ -33,6 +37,7 @@ const ListPage = ({ match }) => {
             list={list}
             todos={todos}
             onDelete={handleDelete}
+            onUpdate={handleUpdate}
             />
             <TodoForm
                 onSubmit={handleSubmit}

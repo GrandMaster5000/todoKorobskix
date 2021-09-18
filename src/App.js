@@ -6,13 +6,13 @@ import AppContent from './components/AppContent';
 import ListPage from './pages/List';
 
 import './App.scss';
-import useApi from './hooks/db';
+import useApi from './hooks/api';
 
 
 
 export default function App() {
   const {data: {lists}} = useApi();
-  
+
   return (
     <div className='app'>
       <AppDrawer lists={lists}/>

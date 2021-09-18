@@ -39,6 +39,11 @@ export function createTodo(data) {
     }));
 }
 
+export function updateTodo(todoId, data) {
+  return db.collection("todos").doc(todoId).update({...data})
+    .then(() => todoId);
+}
+
 export function deleteTodo(todoId) {
   return db.collection("todos").doc(todoId).delete()
   .then(() => todoId);

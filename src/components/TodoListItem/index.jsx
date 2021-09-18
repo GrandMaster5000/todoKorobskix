@@ -7,13 +7,17 @@ import {
 import './index.scss';
 
 
-const TodoListItem = ({todo, onCompleteChange, onDelete}) => {
+const TodoListItem = ({todo, onDelete, onUpdate}) => {
+    const handleChange = () => {
+        onUpdate(todo.id, {completed: !todo.completed});
+    }
+ 
     return (
         <ListItem className="todo-list-item">
             <ListItemGraphic>
                 <Checkbox 
                 checked={todo.completed}
-                onChange={onCompleteChange}
+                onChange={handleChange}
                 />
             </ListItemGraphic>
 
