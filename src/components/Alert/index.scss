@@ -1,0 +1,38 @@
+.alert {
+    opacity: 1;
+    transition: opacity .15s linear;
+    position: relative;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    margin: 15px;
+    &-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+
+        cursor: pointer;
+
+        border: none;
+        background: none;
+    }
+}
+
+.alert-success {
+    color: #0f5132;
+    background-color: #d1e7dd;
+    border-color: #badbcc;
+    .alert-close line {
+        stroke: #0f5132;
+    }
+}
+
+.alert-danger {
+    color: #842029;
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+    .alert-close line {
+        stroke: #842029;
+    }
+}

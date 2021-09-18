@@ -8,7 +8,6 @@ import {
     ListItemGraphic,
     ListItemText,
     ListGroup,
-    ListGroupSubheader,
     ListDivider,
     Icon
 } from 'mdc-react';
