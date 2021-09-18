@@ -1,37 +1,28 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import { Switch, Route } from 'react-router';
-
-import {getList} from './api';
-import DBContext from './context/db';
 
 import AppDrawer from './components/AppDrawer';
 import AppContent from './components/AppContent';
 import ListPage from './pages/List';
 
 import './App.scss';
+import useApi from './hooks/db';
 
 
 
 export default function App() {
-  const [lists , setLists] = useState([]);
-
-  useEffect(() => {
-    getList()
-    .then(setLists);
-  }, [])
-
+  const {data: {lists}} = useApi();
+  
   return (
-    <DBContext.Provider value={{lists}}>
-      <div className='app'>
-        <AppDrawer lists={lists}/>
+    <div className='app'>
+      <AppDrawer lists={lists}/>
 
-        <AppContent>
-            <Switch>
-              <Route path='/:listId' component={ListPage}/>
-            </Switch>
-        </AppContent>
-      </div>
-    </DBContext.Provider>
+      <AppContent>
+          <Switch>
+            <Route path='/:listId' component={ListPage}/>
+          </Switch>
+      </AppContent>
+    </div>
   );
 }
 

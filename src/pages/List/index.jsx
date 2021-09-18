@@ -1,35 +1,29 @@
-import React, {useContext, useEffect, useState} from 'react';
-import DBContext from '../../context/db';
+import React, {useEffect} from 'react';
 import Spinner from '../../components/Spinner';
 import TodoList from '../../components/TodoList';
 import TodoForm from '../../components/TodoForm';
-import { getListTodos, createTodo, deleteTodo } from '../../api';
+import useApi from '../../hooks/db';
 import './index.scss';
 
 
 const ListPage = ({ match }) => {
-    const [todos , setTodos] = useState([]);  
-    const db = useContext(DBContext);
-    const list = db.lists.find(list => list.id === match.params.listId);
+    const {data: {lists, todos}, actions} = useApi();
+    const list = lists.find(list => list.id === match.params.listId);
 
     useEffect(() => {
-        getListTodos(match.params.listId)
-            .then(setTodos);     
-    }, [db, match.params.listId])
+        actions.getListTodos(match.params.listId)    
+    }, [actions, match.params.listId]);
         
     const handleSubmit = (areaValue) => {
-       createTodo({
+       actions.createTodo({
            title: areaValue,
            listId: list.id
-       })
-       .then(todo => setTodos([...todos, todo]))
-    }
+       });
+    };
 
     const handleDelete = (todoId) => {
-        deleteTodo(todoId).then(todoId => {
-            setTodos([...todos.filter(t => t.id !== todoId)])
-        })
-    }
+        actions.deleteTodo(todoId);
+    };
 
     if(!list || !todos) return <Spinner/>
 

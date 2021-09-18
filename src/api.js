@@ -26,9 +26,6 @@ export function getListTodos(listId) {
       }));
       return items;
     })
-    .catch(error => {
-      console.log("error:" , error);
-    });
 }
 export function createTodo(data) {
    return db.collection("todos").add({
