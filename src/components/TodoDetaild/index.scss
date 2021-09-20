@@ -1,0 +1,10 @@
+.todo-details {
+    flex-basis: 256px;
+    padding: 1rem;
+    background-color: #fff;
+    .todo-details-layout {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}

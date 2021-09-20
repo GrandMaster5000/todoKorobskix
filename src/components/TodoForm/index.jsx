@@ -4,6 +4,7 @@ import {
 } from 'mdc-react';
 import './index.scss';
 import Alert from '../Alert';
+import TextArea from '../Textarea';
 
 
 const TodoForm = ({ onSubmit }) => {
@@ -36,7 +37,7 @@ const TodoForm = ({ onSubmit }) => {
             <form onSubmit={handleSubmit} className='todo-form'>
                 <List>
                     <ListItem>    
-                    <textarea 
+                    <TextArea 
                     className='todo-list-textarea' 
                     placeholder='Что нужно сделать...'
                     onChange={e => setAreaValue(e.target.value)}

@@ -7,7 +7,7 @@ import {
 import './index.scss';
 
 
-const TodoListItem = ({todo, onDelete, onUpdate}) => {
+const TodoListItem = ({todo, onDelete, onUpdate, onSelect}) => {
     const handleChange = () => {
         onUpdate(todo.id, {completed: !todo.completed});
     }
@@ -21,7 +21,7 @@ const TodoListItem = ({todo, onDelete, onUpdate}) => {
                 />
             </ListItemGraphic>
 
-            <ListItemText>{todo.title}</ListItemText>
+            <ListItemText onClick={() => onSelect(todo)}>{todo.title}</ListItemText>
             <ListItemMeta className='meta-list'>
                 <IconButton onClick={() => onDelete(todo.id)}>
                     <Icon className='list-item-icon'>delete</Icon>
