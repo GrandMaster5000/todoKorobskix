@@ -55,7 +55,10 @@ export function createTodo(data) {
 
 export function updateTodo(todoId, data) {
   return db.collection("todos").doc(todoId).update({...data})
-    .then(() => todoId);
+    .then(() => ({
+      id: todoId,
+      ...data
+    }));
 }
 
 export function deleteTodo(todoId) {
