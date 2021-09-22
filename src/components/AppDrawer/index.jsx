@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
     Drawer,
     DrawerHeader,
@@ -14,13 +14,18 @@ import {
 import { NavLink } from 'react-router-dom';
 import './AppDrow.scss';
 
+import DataContext from '../../context/data'
+
 
 const AppDrawer = ({lists}) => {
+    const {state} = useContext(DataContext);
+
     return (
         
         <Drawer className="mdc-drawer">
             <DrawerHeader
                 title='Korobskix Todo'
+                subtitle={state.user ? state.user.email : ''}
             />
 
            <DrawerContent>

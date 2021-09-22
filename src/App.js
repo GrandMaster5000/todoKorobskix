@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { Switch, Route } from 'react-router';
 
 import AppDrawer from './components/AppDrawer';
@@ -8,6 +8,7 @@ import ListPage from './pages/List';
 import './App.scss';
 import DataContext from './context/data';
 import { reducer, initialState, actions } from './store/store';
+import Auth from './pages/Auth';
 
 
 
@@ -15,9 +16,13 @@ export default function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-      console.log(actions);
       actions.getLists(dispatch);
-  }, [])
+      actions.setAuth(dispatch);
+  }, []);
+
+  if(!state.user) {
+      return <Route component={Auth}/>
+  }
 
   return (
     <DataContext.Provider value={{state, dispatch}}>

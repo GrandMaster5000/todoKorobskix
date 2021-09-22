@@ -56,6 +56,7 @@ const ListPage = ({ match }) => {
                 onUpdate={handleUpdate}
                 />
                 <TodoForm
+                    className='todo-form'
                     onSubmit={handleSubmit}
                 />
             </Layout>

@@ -2,6 +2,16 @@ import * as api from '../api';
 
 export const reducer = (state = initialState, action) => {
     switch(action.type) {
+        case 'LOGIN_USER':
+            return  {
+                ...state,
+                user: action.payload.user
+            };
+        case 'LOGOUT_USER':
+            return  {
+                ...state,
+                user: null
+            };
         case 'GET_LISTS': 
             return {
                 ...state,
@@ -48,8 +58,13 @@ export const reducer = (state = initialState, action) => {
 }
 
 export const initialState = {
+    user: null,
     lists: [],
     todos: []
+}
+
+export const loginUser = (login, password, dispatch) => {
+    return api.loginUser(login, password);
 }
 
 export const getLists = (dispatch) => {
@@ -109,11 +124,34 @@ export const updateTodo = (todoId, data, dispatch) => {
         }));
 }
 
+export const setAuth = (dispatch) => {
+    api.onAuth(user => {
+        if(user) {
+            dispatch({
+                type: 'LOGIN_USER',
+                payload: {
+                    user
+                }
+            });
+            console.log(user);
+        } else {
+            dispatch({
+                type: 'LOGOUT_USER'
+            });
+        }
+    })
+     
+}
+
 export const actions = {
     getLists,
     getTodos,
     getListTodos,
     createTodo,
     deleteTodo,
-    updateTodo
+    updateTodo,
+    setAuth,
+    loginUser
 };
+
+
