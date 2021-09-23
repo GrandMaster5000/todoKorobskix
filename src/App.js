@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router';
 
 import AppDrawer from './components/AppDrawer';
@@ -6,18 +6,17 @@ import AppContent from './components/AppContent';
 import ListPage from './pages/List';
 
 import './App.scss';
-import DataContext from './context/data';
-import { reducer, initialState, actions } from './store/store';
 import Auth from './pages/Auth';
+import useStore from './hooks/store';
 
 
 
 export default function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const {state, actions} = useStore();
 
   useEffect(() => {
-      actions.getLists(dispatch);
-      actions.setAuth(dispatch);
+      actions.getLists();
+      actions.setAuth();
   }, []);
 
   if(!state.user) {
@@ -25,7 +24,6 @@ export default function App() {
   }
 
   return (
-    <DataContext.Provider value={{state, dispatch}}>
       <div className='app'>
         <AppDrawer lists={state.lists} todos={state.todos}/>
 
@@ -38,7 +36,6 @@ export default function App() {
             </Switch>
         </AppContent>
       </div>
-    </DataContext.Provider>
   );
 }
 

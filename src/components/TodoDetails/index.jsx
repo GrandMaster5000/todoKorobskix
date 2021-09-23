@@ -17,7 +17,7 @@ import TextArea from '../Textarea';
 
 const TodoDetails = ({todo, onClose ,className, ...props}) => {
     const [textareaValue, setTextAreaValue] = useState('');
-    console.log(todo);
+    
     return (
         <>
             <aside className={classNames('todo-details', className)} {...props}>

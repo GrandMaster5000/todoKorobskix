@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
     Drawer,
     DrawerHeader,
@@ -17,13 +17,12 @@ import {
 } from 'mdc-react';
 import { NavLink } from 'react-router-dom';
 import './AppDrow.scss';
-import { actions } from '../../store/store';
 
-import DataContext from '../../context/data'
+import useStore from '../../hooks/store';
 
 
 const AppDrawer = ({lists}) => {
-    const {state} = useContext(DataContext);
+    const {state, actions} = useStore();
 
     return (
         

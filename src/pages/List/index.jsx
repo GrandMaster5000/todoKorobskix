@@ -1,42 +1,40 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Layout,SideSheet, Typography} from 'mdc-react';
 import Spinner from '../../components/Spinner';
 import TodoList from '../../components/TodoList';
 import TodoForm from '../../components/TodoForm';
-import DataContext from '../../context/data';
 import TodoDetails from '../../components/TodoDetails';
-import { actions } from '../../store/store';
 import classNames from 'classnames';
-
+import useStore from '../../hooks/store';
 import './index.scss';
 
 
 const ListPage = ({ match }) => {
-    const {state, dispatch} = useContext(DataContext)
+    const {state, actions} = useStore();
     const [selectedTodo, setSelectedTodo] = useState(null);
     const list = state.lists.find(list => list.id === match.params.listId);
 
     useEffect(() => {
         if (match.params.listId) {
-            actions.getListTodos(match.params.listId, dispatch);
+            actions.getListTodos(match.params.listId);
         } else {
-            actions.getTodos(dispatch);
+            actions.getTodos();
         }
-    }, [dispatch,match.params.listId]);
+    }, [match.params.listId]);
         
     const handleSubmit = (areaValue) => {
        actions.createTodo({
            title: areaValue,
            listId: list.id
-       }, dispatch);
+       });
     };
 
     const handleDelete = (todoId) => {
-        actions.deleteTodo(todoId, dispatch);
+        actions.deleteTodo(todoId);
     };
 
     const handleUpdate = (todoId, data) => {
-        actions.updateTodo(todoId, data, dispatch);
+        actions.updateTodo(todoId, data);
     };
 
     const handleSelect = (todo) => {

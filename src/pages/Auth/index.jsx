@@ -2,10 +2,11 @@ import React, {useState} from 'react'
 import {
     Typography
 } from 'mdc-react'
-import { actions } from '../../store/store';
 import './index.scss';
+import useStore from '../../hooks/store';
 
 const Auth = () => {
+    const { actions } = useStore();
     const [email, setEmail] = useState('');
     const [password , setPassword] = useState('');
     const [error , setError] = useState('');

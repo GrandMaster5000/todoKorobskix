@@ -1,11 +1,7 @@
 import {db, auth} from './firebase';
 
 export function loginUser(email, password) {
-    auth.signInWithEmailAndPassword(email, password)
-        .then(() => {})
-        .catch((error) => {
-          console.log(error);
-        });
+  return auth.signInWithEmailAndPassword(email, password);
 }
 
 export function signOutUser() {
@@ -82,6 +78,6 @@ export function deleteTodo(todoId) {
   .then(() => todoId);
 }
 
-export function onAuth(handleAuth) {
+export function initAuth(handleAuth) {
   auth.onAuthStateChanged(handleAuth);
 }
