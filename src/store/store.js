@@ -67,6 +67,14 @@ export const loginUser = (login, password, dispatch) => {
     return api.loginUser(login, password);
 }
 
+export function signOutUser() {
+    return api.signOutUser().then(() => ({}));
+}
+
+export function registerUser(email, password) {
+    return api.registerUser(email, password).then(() => ({}));
+}
+
 export const getLists = (dispatch) => {
     return api.getList()
         .then(lists => dispatch({
@@ -151,7 +159,9 @@ export const actions = {
     deleteTodo,
     updateTodo,
     setAuth,
-    loginUser
+    loginUser,
+    signOutUser,
+    registerUser
 };
 
 

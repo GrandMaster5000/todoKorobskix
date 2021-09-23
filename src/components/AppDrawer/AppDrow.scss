@@ -13,3 +13,14 @@
 .mdc-list-divider {
     border: none;
 }
+.layout-user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    & button i {
+        transition:  .3s all;
+    }
+    & button i:hover {
+        color: rgb(163, 33, 33);
+    }
+}

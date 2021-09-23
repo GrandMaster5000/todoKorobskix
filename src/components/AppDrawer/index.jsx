@@ -9,10 +9,15 @@ import {
     ListItemText,
     ListGroup,
     ListDivider,
-    Icon
+    ListItemMeta,
+    Icon,
+    Layout,
+    Typography,
+    IconButton
 } from 'mdc-react';
 import { NavLink } from 'react-router-dom';
 import './AppDrow.scss';
+import { actions } from '../../store/store';
 
 import DataContext from '../../context/data'
 
@@ -25,8 +30,14 @@ const AppDrawer = ({lists}) => {
         <Drawer className="mdc-drawer">
             <DrawerHeader
                 title='Korobskix Todo'
-                subtitle={state.user ? state.user.email : ''}
-            />
+            >
+                <Layout className='layout-user'>
+                    <Typography variant="body2">{state.user.email}</Typography>
+                    <IconButton onClick={() => actions.signOutUser()} title="Выйти">
+                        <Icon>exit_to_app</Icon>
+                    </IconButton>
+                </Layout>
+            </DrawerHeader>
 
            <DrawerContent>
                 <ListGroup>
@@ -71,6 +82,10 @@ const AppDrawer = ({lists}) => {
                                 <ListItemText>
                                     {i.title}
                                 </ListItemText>
+
+                                  <ListItemMeta>
+                                    
+                                </ListItemMeta>
                             </ListItem>
                         ))}
                     </List>

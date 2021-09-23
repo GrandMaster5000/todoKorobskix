@@ -1,14 +1,19 @@
 import {db, auth} from './firebase';
 
-export function loginUser(login, password) {
-    auth.signInWithEmailAndPassword(login, password)
-        .then((userCredential) => {
-        
-         console.log(userCredential+ ' ' + 'LOGGED');
-        })
+export function loginUser(email, password) {
+    auth.signInWithEmailAndPassword(email, password)
+        .then(() => {})
         .catch((error) => {
           console.log(error);
         });
+}
+
+export function signOutUser() {
+    return auth.signOut();
+}
+
+export function registerUser(email, password) {
+    return auth.createUserWithEmailAndPassword(email, password);
 }
 
 export function getList() {

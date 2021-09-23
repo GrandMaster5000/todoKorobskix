@@ -1,14 +1,39 @@
 #todo-list-page {
     max-width: 100%;
-    display: flex;
-    flex-direction: row;
+    height: 100%;
     .mdc-layout {
         flex: 1;
     }
     .todo-form {
         margin: 0 1rem;
     }
+    .todo-app-bar {
+        background-color: rgb(85, 26, 139);
+    }
+    .mdc-side-sheet-app-details {
+        justify-content: space-between;
+        align-items: center;
+    }
+    .sidebar-list-page {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        height: 100vh;
+        aside {
+            background-color: #fff;
+        }
+    }
+    .mdc-side-sheet {
+        transition: margin-right 250ms;
+    }
+    .mdc-side-sheet--open {
+        margin-right: 0;
+    }
+    .mdc-side-sheet--close {
+        margin-right: -125px;
+    }
 }
+
+
 
 
 

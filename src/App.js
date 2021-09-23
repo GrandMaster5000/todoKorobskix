@@ -27,7 +27,7 @@ export default function App() {
   return (
     <DataContext.Provider value={{state, dispatch}}>
       <div className='app'>
-        <AppDrawer lists={state.lists}/>
+        <AppDrawer lists={state.lists} todos={state.todos}/>
 
         <AppContent>
             <Switch>
