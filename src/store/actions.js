@@ -12,16 +12,16 @@ export function registerUser(email, password) {
     return api.registerUser(email, password).then(() => ({}));
 }
 
-export const getLists = () => {
-    return api.getList()
+export const getLists = (userId) => {
+    return api.getList(userId)
         .then(lists => ({
             type: 'GET_LISTS',
             payload: {lists}
         }));
 }
 
-export const getTodos = () => {
-    return api.getTodos()
+export const getTodos = (userId) => {
+    return api.getTodos(userId)
         .then(todos => ({
             type: 'GET_TODOS',
             payload: {todos}

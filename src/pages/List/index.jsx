@@ -12,8 +12,7 @@ import './index.scss';
 const ListPage = ({ match }) => {
     const {state, actions} = useStore();
     const [selectedTodo, setSelectedTodo] = useState(null);
-    const list = state.lists.find(list => list.id === match.params.listId);
-
+    const list = state.lists.find(list => list.id === match.params.listId) || {};
     useEffect(() => {
         if (match.params.listId) {
             actions.getListTodos(match.params.listId);
@@ -25,6 +24,7 @@ const ListPage = ({ match }) => {
     const handleSubmit = (areaValue) => {
        actions.createTodo({
            title: areaValue,
+           userId: state.user.uid,
            listId: list.id
        });
     };

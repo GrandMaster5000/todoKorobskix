@@ -15,9 +15,14 @@ export default function App() {
   const {state, actions} = useStore();
 
   useEffect(() => {
-      actions.getLists();
-      actions.setAuth();
+    actions.setAuth();
   }, []);
+  
+  useEffect(() => {
+    if(state.user) {
+      actions.getLists(state.user.uid);
+    }
+  }, [state.user])
 
   if(!state.user) {
       return <Route component={Auth}/>

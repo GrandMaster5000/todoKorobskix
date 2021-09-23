@@ -6,7 +6,7 @@ import TodoListItem from '../TodoListItem';
 import './TodoList.scss';
 
 
-const TodoList = ({list, todos, onDelete, onUpdate, onSelect}) => {
+const TodoList = ({todos, onDelete, onUpdate, onSelect}) => {
     return (
         <>
             <div className='todo-list'>
