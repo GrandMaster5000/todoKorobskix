@@ -1,0 +1,48 @@
+.auth-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .auth-title {
+        font-family: Roboto;
+        font-size: 45px;
+        font-weight: 400;
+    }
+    .auth-form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        border: 1px solid rgb(218, 215, 215);
+        padding: 20px;
+    } 
+    .auth-input {
+        border: none;
+        border-bottom: 2px solid rgb(180, 180, 180);
+        outline: none;
+        padding: 10px;
+        padding-left: 0;
+        font-family: 'Roboto';
+        &::placeholder {
+            color: gray;
+        }
+        &:focus {
+            border-bottom: 2px solid rgb(158, 4, 4);
+        }
+    }
+    .auth-button-wrapper {
+        margin-top: 10px;
+    }
+    .auth-button {
+        border: none;
+        background: none;
+        font-family: 'Roboto', sans-serif;
+        color: rgb(85, 26, 139);
+        font-weight: 900;
+        cursor: pointer;
+        transition: .3s all;
+        &:hover {
+            color: rgb(124, 23, 219);
+        }
+    }
+}
