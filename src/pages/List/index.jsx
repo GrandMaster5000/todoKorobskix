@@ -12,14 +12,30 @@ import './index.scss';
 const ListPage = ({ match }) => {
     const {state, actions} = useStore();
     const [selectedTodo, setSelectedTodo] = useState(null);
-    const list = state.lists.find(list => list.id === match.params.listId) || {};
-    useEffect(() => {
-        if (match.params.listId) {
-            actions.getListTodos(match.params.listId);
-        } else {
-            actions.getTodos();
+    const path = match.path;
+
+    const list = state.lists.find(list => list.id === match.params.listId) 
+    || { title: 'Задачи'};
+
+    const getTodosByFilter = ({
+        '/': todos => todos,
+        '/important': todos => {
+            list.title = 'Важные'
+            return todos.filter(todo => todo.important)
+        },
+        '/planned': todos => {
+            list.title = 'Запланированные'
+           return todos.filter(todo => todo.dueDate)
         }
-    }, [match.params.listId]);
+    });
+
+    const getTodosByList = (listId, todos) => todos.filter(todo => todo.listId === list.id);
+
+    const todos = match.params.listId ? getTodosByList(match.params.listId, state.todos) : getTodosByFilter[path](state.todos);
+
+    useEffect(() => {
+        setSelectedTodo(null);
+    }, [match.path, match.params.listId]);
         
     const handleSubmit = (areaValue) => {
        actions.createTodo({
@@ -42,7 +58,7 @@ const ListPage = ({ match }) => {
     }
 
 
-    if(!list || !state.todos) return <Spinner/>
+    if(!list || !todos) return <Spinner/>
 
     return (
         <Layout id='todo-list-page' row>
@@ -56,7 +72,7 @@ const ListPage = ({ match }) => {
                 <Layout column className="mdc-side-sheet-app-content">
                     <TodoList 
                     list={list}
-                    todos={state.todos}
+                    todos={todos}
                     onSelect={handleSelect}
                     onDelete={handleDelete}
                     onUpdate={handleUpdate}
@@ -68,7 +84,6 @@ const ListPage = ({ match }) => {
                 </Layout>
 
                 <SideSheet
-                    // open={false}
                     dismissible
                     appContentSelector=".mdc-side-sheet-app-content"
                     className={classNames({

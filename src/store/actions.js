@@ -27,6 +27,21 @@ export const getTodos = (userId) => {
             payload: {todos}
         }));
 }
+// export const getImportantTodos = (userId) => {
+//     return api.getImportantTodos(userId)
+//         .then(todos => ({
+//             type: 'GET_TODOS',
+//             payload: {todos}
+//         }));
+// }
+// export const getPlannedTodos = (userId) => {
+//     console.log('plan');
+//     return api.getPlannedTodos(userId)
+//         .then(todos => ({
+//             type: 'GET_TODOS',
+//             payload: {todos}
+//         }));
+// }
 
 export const getListTodos = (listId) => {
     return api.getListTodos(listId)

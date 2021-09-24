@@ -11,7 +11,6 @@ const TodoListItem = ({todo, onDelete, onUpdate, onSelect}) => {
     const handleChange = () => {
         onUpdate(todo.id, {completed: !todo.completed});
     }
- 
     return (
         <ListItem className="todo-list-item">
             <ListItemGraphic>
@@ -24,7 +23,11 @@ const TodoListItem = ({todo, onDelete, onUpdate, onSelect}) => {
             <ListItemText onClick={() => onSelect(todo)}>{todo.title}</ListItemText>
             <ListItemMeta className='meta-list'>
                 <IconButton onClick={() => onDelete(todo.id)}>
-                    <Icon className='list-item-icon'>delete</Icon>
+                    <Icon className='list-item-icon list-item-icon-delete'>delete</Icon>
+                </IconButton>
+
+                <IconButton onClick={() => onUpdate(todo.id, { important: !todo.important})}>
+                    <Icon className='list-item-icon list-item-icon-star'>{todo.important ? 'star' : 'star_outline'}</Icon>
                 </IconButton>
             </ListItemMeta>
         </ListItem>

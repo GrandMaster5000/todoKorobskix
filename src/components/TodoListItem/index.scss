@@ -24,7 +24,10 @@
     .list-item-icon {
         transition: .3s all;
     }
-    .meta-list:hover .list-item-icon {
+    .meta-list .list-item-icon-delete:hover {
         color: #842029;
+    }
+    .meta-list .list-item-icon-star:hover {
+        color: rgb(85, 26, 139);
     }
 }

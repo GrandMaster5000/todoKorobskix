@@ -10,11 +10,11 @@
     }
     .todo-steps {
         margin: 1rem 0;
-    
+        
         .todo-step-list {
             .mdc-list-item {
                 padding: 0;
-    
+                
                 .mdc-checkbox {
                     margin-right: .5rem;
                 }
@@ -33,5 +33,8 @@
         border-bottom: 1px solid black;
         padding-top: 25px;
         height: 27px;
+    }
+    .textarea-layout {
+        margin:10px 0;
     }
 }

@@ -18,7 +18,7 @@ const reducer = (state, action) => {
         case 'GET_TODOS': 
             return {
                 ...state,
-                todos: state.todos.concat(action.payload.todos)
+                todos: action.payload.todos
             };
         case 'GET_LIST_TODOS': 
             return {
