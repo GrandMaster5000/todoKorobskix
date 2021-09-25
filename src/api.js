@@ -35,24 +35,6 @@ export function getTodos(userId = '') {
         .then(mapSnapshot);
 }
 
-// export function getImportantTodos(userId = '') {
-//     return db.collection('todos')
-//       .where('listId', '==', '')
-//       .where('userId', '==', userId)
-//       .where('important', '==', true)
-//       .get()
-//       .then(mapSnapshot);
-// }
-
-// export function getPlannedTodos(userId = '') {
-//     return db.collection('todos')
-//       .where('listId', '==', '')
-//       .where('userId', '==', userId)
-//       .where('dueDate', '>=', Date.now() / 1000)
-//       .get()
-//       .then(mapSnapshot);
-// }
-
 export function getListTodos(listId) {
   return db.collection('todos')
   .where('listId', '==', listId)

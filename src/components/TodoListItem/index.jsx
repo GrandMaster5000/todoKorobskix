@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     ListItem, ListItemGraphic, ListItemText,ListItemMeta,
     Checkbox,
@@ -8,9 +8,14 @@ import './index.scss';
 
 
 const TodoListItem = ({todo, onDelete, onUpdate, onSelect}) => {
+    useEffect(() => {
+        onSelect(todo);
+    }, [todo])
+    
     const handleChange = () => {
         onUpdate(todo.id, {completed: !todo.completed});
     }
+    console.log(todo);
     return (
         <ListItem className="todo-list-item">
             <ListItemGraphic>

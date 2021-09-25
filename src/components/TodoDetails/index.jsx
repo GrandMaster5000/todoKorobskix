@@ -14,10 +14,38 @@ import classNames from 'classnames';
 import './index.scss';
 import TextArea from '../Textarea';
 import moment from 'moment';
+import useStore from '../../hooks/store';
 
 
 const TodoDetails = ({todo, onClose ,className, ...props}) => {
-    const [textareaValue, setTextAreaValue] = useState('');
+    const [textareaValueName, setTextAreaValueName] = useState('');
+    const [textareaValueStep, setTextAreaValueStep] = useState('');
+    const {state,actions} = useStore();
+
+    const handleName = (e) => {
+        if(e.code === 'Enter') {
+            e.preventDefault();
+            actions.updateTodo(todo.id, { title: textareaValueName})
+        }
+    }
+  
+    const handleStep = (e) => {
+        if(e.code === 'Enter') {
+            e.preventDefault();
+            actions.updateTodo(todo.id,
+            {steps: [...todo.steps, {completed: false, title: textareaValueStep}]});
+            setTextAreaValueStep('');
+        }
+    }
+
+    const handleCheckChange = (title) => {
+        actions.updateTodo(todo.id, {steps: todo.steps.map(s => {
+            if(s.title === title) {
+                return {title: s.title, completed: !s.completed} 
+            }
+            return s;
+        })})
+    }
 
     return (
         <>
@@ -33,9 +61,10 @@ const TodoDetails = ({todo, onClose ,className, ...props}) => {
                 
                 <Layout className='todo-details-layout textarea-layout'>    
                         <TextArea
-                            onChange={(e) => setTextAreaValue(e.target.value)}
-                            value={textareaValue}
+                            onChange={(e) => setTextAreaValueName(e.target.value)}
+                            value={textareaValueName}
                             placeholder={todo.title}
+                            onKeyDown={handleName}
                         />
                     <label className='text-area-label' htmlFor="textarea">Название</label>
                 </Layout>
@@ -44,7 +73,7 @@ const TodoDetails = ({todo, onClose ,className, ...props}) => {
                     <TextArea
                         type='datetime-local'
                         onChange={(e) => {}}
-                        value={textareaValue}
+                        value={textareaValueName}
                         placeholder={todo.dueDate 
                         ? moment(todo.dueDate.seconds * 1000).format('YYYY-MM-DD') 
                         : 'Добавить дату'}
@@ -70,6 +99,8 @@ const TodoDetails = ({todo, onClose ,className, ...props}) => {
                                     <ListItemGraphic>
                                         <Checkbox
                                             checked={step.completed}
+                                            className='step-checkbox'
+                                            onChange={() => handleCheckChange(step.title)}
                                         />
                                     </ListItemGraphic>
 
@@ -78,7 +109,19 @@ const TodoDetails = ({todo, onClose ,className, ...props}) => {
                             )}
                         </List>
                     }
+
                 </section>
+                <Layout className='todo-details-layout textarea-layout'>    
+                    <TextArea
+                        type='datetime-local'
+                        onChange={(e) => setTextAreaValueStep(e.target.value)}
+                        value={textareaValueStep}
+                        placeholder='Добавить шаг'
+                        onKeyDown={handleStep}
+                    />
+                    <label className='text-area-label' htmlFor="textarea">Название шага</label>
+                </Layout>
+
             </aside>
         </>
     );

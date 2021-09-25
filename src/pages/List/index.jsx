@@ -14,6 +14,7 @@ const ListPage = ({ match }) => {
     const [selectedTodo, setSelectedTodo] = useState(null);
     const path = match.path;
 
+    console.log(selectedTodo);
     const list = state.lists.find(list => list.id === match.params.listId) 
     || { title: 'Задачи'};
 
