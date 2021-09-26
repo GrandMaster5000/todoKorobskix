@@ -20,7 +20,7 @@ import useStore from '../../hooks/store';
 const TodoDetails = ({todo, onClose ,className, ...props}) => {
     const [textareaValueName, setTextAreaValueName] = useState('');
     const [textareaValueStep, setTextAreaValueStep] = useState('');
-    const {state,actions} = useStore();
+    const {actions} = useStore();
 
     const handleName = (e) => {
         if(e.code === 'Enter') {

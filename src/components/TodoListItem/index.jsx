@@ -10,12 +10,11 @@ import './index.scss';
 const TodoListItem = ({todo, onDelete, onUpdate, onSelect}) => {
     useEffect(() => {
         onSelect(todo);
-    }, [todo])
+    }, [todo.steps])
     
     const handleChange = () => {
         onUpdate(todo.id, {completed: !todo.completed});
     }
-    console.log(todo);
     return (
         <ListItem className="todo-list-item">
             <ListItemGraphic>

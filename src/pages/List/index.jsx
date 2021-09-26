@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Layout,SideSheet, Typography} from 'mdc-react';
+import {Layout,SideSheet} from 'mdc-react';
 import Spinner from '../../components/Spinner';
 import TodoList from '../../components/TodoList';
 import TodoForm from '../../components/TodoForm';
@@ -7,14 +7,15 @@ import TodoDetails from '../../components/TodoDetails';
 import classNames from 'classnames';
 import useStore from '../../hooks/store';
 import './index.scss';
+import PageHeader from '../../components/PageHeader';
 
 
 const ListPage = ({ match }) => {
     const {state, actions} = useStore();
     const [selectedTodo, setSelectedTodo] = useState(null);
+    const [sortBy, setSortBy] = useState('title');
     const path = match.path;
 
-    console.log(selectedTodo);
     const list = state.lists.find(list => list.id === match.params.listId) 
     || { title: 'Задачи'};
 
@@ -32,7 +33,14 @@ const ListPage = ({ match }) => {
 
     const getTodosByList = (listId, todos) => todos.filter(todo => todo.listId === list.id);
 
+    const sortFn = {
+        title: (a, b) => a.title.localeCompare(b.title),
+        important: (a, b) => b.important - a.important,
+        completed: (a, b) => b.completed - a.completed
+    };
+
     const todos = match.params.listId ? getTodosByList(match.params.listId, state.todos) : getTodosByFilter[path](state.todos);
+    const sortedTodos = sortBy ?  todos.slice().sort(sortFn[sortBy]) : todos;
 
     useEffect(() => {
         setSelectedTodo(null);
@@ -58,22 +66,24 @@ const ListPage = ({ match }) => {
         setSelectedTodo(todo)
     }
 
+    const handleSortChange = (sort) => {
+        setSortBy(sort)
+    }
 
     if(!list || !todos) return <Spinner/>
 
     return (
         <Layout id='todo-list-page' row>
-            <Typography 
-            className='todo-list__title'
-            type='headline4'
-            >{list && list.title}</Typography>
+            <PageHeader 
+            list={list}
+            onSortChange={handleSortChange}
+            />
+
             <Layout  className='sidebar-list-page'>
-
-
                 <Layout column className="mdc-side-sheet-app-content">
                     <TodoList 
                     list={list}
-                    todos={todos}
+                    todos={sortedTodos}
                     onSelect={handleSelect}
                     onDelete={handleDelete}
                     onUpdate={handleUpdate}
