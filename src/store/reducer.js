@@ -43,13 +43,38 @@ const reducer = (state, action) => {
 
                     return todo
                 })
-            }
+            };
         case 'DELETE_TODO': 
             return {
                 ...state,
                 todos: state.todos.filter(todo => todo.id !== 
                 action.payload.todoId)
-            }
+            };
+        case 'CREATE_LIST': 
+            return {
+                ...state,
+                lists: state.lists.concat(action.payload.list)
+            };
+        case 'UPDATE_LIST': 
+            return {
+                ...state,
+                lists: state.lists.map(list => {
+                    if(list.id === action.payload.list.id) {
+                        return {
+                            ...list,
+                            ...action.payload.list
+                        }
+                    }
+
+                    return list
+                })
+            };
+        case 'DELETE_LIST': 
+            return {
+                ...state,
+                lists: state.lists.filter(list => list.id !== 
+                action.payload.listId)
+            };
         default :
             return state;
     }

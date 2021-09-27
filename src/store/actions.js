@@ -47,6 +47,36 @@ export const createTodo = (data ) => {
             }
         }));
 } 
+export const createList = (data) => {
+    return api.createList(data)
+        .then(list => ({
+            type: 'CREATE_LIST',
+            payload: {
+                list
+            }
+        }))
+}
+
+export const updateList = (listId,data) => {
+    return api.updateList(listId, data)
+        .then(list => ({
+            type: 'UPDATE_LIST',
+            payload: {
+                listId,
+                list
+            }
+        }));
+} 
+
+export const deleteList = (listId) => {
+    return api.deleteList(listId)
+        .then(listId => ({
+            type: 'DELETE_LIST',
+            payload: {
+                listId
+            }
+        }))
+}
 
 export const deleteTodo = (todoId) => {
     return api.deleteTodo(todoId)
@@ -94,7 +124,10 @@ export const actions = {
     setAuth,
     loginUser,
     signOutUser,
-    registerUser
+    registerUser,
+    createList,
+    updateList,
+    deleteList
 };
 
 

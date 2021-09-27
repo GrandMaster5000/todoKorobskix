@@ -24,3 +24,32 @@
         color: rgb(163, 33, 33);
     }
 }
+.add-list-button {
+    color: #551a8b !important;
+}
+.list-delete-button {
+    padding: 0;
+    height: 100%;
+}
+
+.list-item-dg {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    .list-item-gr-fe {
+        width: 50px;
+        justify-self: flex-end;
+        display: none;
+    }
+    .list-icon-delete {
+        transition: .3s all;
+    }
+    .list-icon-delete:hover {
+        color: #842029;
+    }
+}
+
+.list-item-dg:hover {
+    .list-item-gr-fe {
+        display: block;
+    }
+}

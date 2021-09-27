@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Drawer,
     DrawerHeader,
@@ -13,19 +13,43 @@ import {
     Icon,
     Layout,
     Typography,
-    IconButton
+    IconButton,
+    Button
 } from 'mdc-react';
 import { NavLink } from 'react-router-dom';
 import './AppDrow.scss';
+import TextAreaLayout from '../TextAreaLayout';
 
 import useStore from '../../hooks/store';
 
 
 const AppDrawer = ({lists}) => {
     const {state, actions} = useStore();
+    const [isListFormOpen, setListFormOpen] = useState(false);
+    const [listTitle, setListTitle] = useState('');
 
-    return (
-        
+    const handleSubmit = (e) => {
+        e.preventDefault(e);
+        actions.createList({
+            title: listTitle,
+            userId: state.user.uid
+        }).then(() => {
+            setListTitle('');
+            setListFormOpen(false)
+        })
+    }
+
+    const handleListTitle = (e) => {
+        if(e.code === 'Enter') {
+            e.preventDefault();
+            handleSubmit(e);
+        }
+    }
+
+    const handleListDelete = (listId) => {
+        actions.deleteList(listId);
+    }
+    return (  
         <Drawer className="mdc-drawer">
             <DrawerHeader
                 title='Korobskix Todo'
@@ -73,6 +97,7 @@ const AppDrawer = ({lists}) => {
                             component={NavLink}
                             to={i.id}
                             activeClassName="mdc-list-item--activated"
+                            className='list-item-dg'
                             >
                                 <ListItemGraphic>
                                     <Icon>list</Icon>
@@ -82,14 +107,38 @@ const AppDrawer = ({lists}) => {
                                     {i.title}
                                 </ListItemText>
 
-                                  <ListItemMeta>
-                                    
-                                </ListItemMeta>
+                                <ListItemGraphic className='list-item-gr-fe'>
+                                    <IconButton 
+                                    onClick={() => handleListDelete(i.id)}
+                                    className='list-delete-button'
+                                    >
+                                        <Icon className='list-icon-delete'>delete</Icon>
+                                    </IconButton>
+                                </ListItemGraphic>
                             </ListItem>
                         ))}
                     </List>
-                </ListGroup>
 
+                    <Layout>
+                        {isListFormOpen ?
+                            <form onSubmit={handleSubmit}>
+                                <TextAreaLayout
+                                    labelValue='Новая задача'
+                                    value={listTitle}
+                                    onChange={setListTitle}
+                                    placeholder='Добавить задачу'
+                                    handleTextarea={handleListTitle}
+                                />
+                            </form>
+                        :
+                            <Button 
+                            className='add-list-button' 
+                            icon={<Icon>add</Icon>}
+                            onClick={() => setListFormOpen(true)}
+                            >Добавить список</Button>
+                        }
+                    </Layout>
+                </ListGroup>
            </DrawerContent>
         </Drawer>
         

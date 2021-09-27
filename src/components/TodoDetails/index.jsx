@@ -12,9 +12,9 @@ import {
 } from 'mdc-react';
 import classNames from 'classnames';
 import './index.scss';
-import TextArea from '../Textarea';
 import moment from 'moment';
 import useStore from '../../hooks/store';
+import TextAreaLayout from '../TextAreaLayout';
 
 
 const TodoDetails = ({todo, onClose ,className, ...props}) => {
@@ -58,28 +58,23 @@ const TodoDetails = ({todo, onClose ,className, ...props}) => {
                     </IconButton>
                 </Layout>
 
-                
-                <Layout className='todo-details-layout textarea-layout'>    
-                        <TextArea
-                            onChange={(e) => setTextAreaValueName(e.target.value)}
-                            value={textareaValueName}
-                            placeholder={todo.title}
-                            onKeyDown={handleName}
-                        />
-                    <label className='text-area-label' htmlFor="textarea">Название</label>
-                </Layout>
+                <TextAreaLayout
+                    value={textareaValueName}
+                    onChange={setTextAreaValueName}
+                    handleTextarea={handleName}
+                    labelValue='Название'
+                    placeholder={todo.title}
+                />                
 
-                <Layout className='todo-details-layout textarea-layout'>    
-                    <TextArea
-                        type='datetime-local'
-                        onChange={(e) => {}}
-                        value={textareaValueName}
-                        placeholder={todo.dueDate 
-                        ? moment(todo.dueDate.seconds * 1000).format('YYYY-MM-DD') 
-                        : 'Добавить дату'}
-                    />
-                    <label className='text-area-label' htmlFor="textarea">Дата выполнения</label>
-                </Layout>
+                <TextAreaLayout
+                    value={textareaValueName}
+                    onChange={e=>{}}
+                    handleTextarea={()=>{}}
+                    labelValue='Дата выполнения'
+                    placeholder={todo.dueDate 
+                    ? moment(todo.dueDate.seconds * 1000).format('YYYY-MM-DD') 
+                    : 'Добавить дату'}
+                />
 
                 <section className="todo-steps">
                     <Typography variant="subtitle2" noMargin>Шаги</Typography>
@@ -111,17 +106,14 @@ const TodoDetails = ({todo, onClose ,className, ...props}) => {
                     }
 
                 </section>
-                <Layout className='todo-details-layout textarea-layout'>    
-                    <TextArea
-                        type='datetime-local'
-                        onChange={(e) => setTextAreaValueStep(e.target.value)}
-                        value={textareaValueStep}
-                        placeholder='Добавить шаг'
-                        onKeyDown={handleStep}
-                    />
-                    <label className='text-area-label' htmlFor="textarea">Название шага</label>
-                </Layout>
 
+                <TextAreaLayout
+                    value={textareaValueStep}
+                    onChange={setTextAreaValueStep}
+                    handleTextarea={handleStep}
+                    labelValue='Название шага'
+                    placeholder='Добавить шаг'
+                />
             </aside>
         </>
     );

@@ -53,6 +53,7 @@ export function createTodo(data) {
   }
   return db.collection("todos").add({
     completed: false,
+    important: false,
     notes: '',
     dueDate: null,
     steps: [],
@@ -61,6 +62,28 @@ export function createTodo(data) {
   })
   .then(docRef => docRef.get())
   .then(mapDoc);
+}
+export function createList(data) {
+  return db.collection("lists").add({
+    icon: '',
+    sort: '',
+    ...data,
+  })
+  .then(docRef => docRef.get())
+  .then(mapDoc);
+}
+
+export function updateList(listId, data) {
+  return db.collection("lists").doc(listId).update({...data})
+    .then(() => ({
+      id: listId,
+      ...data
+    }));
+}
+
+export function deleteList(listId) {
+  return db.collection("todos").doc(listId).delete()
+  .then(() => listId);
 }
 
 export function updateTodo(todoId, data) {
