@@ -13,6 +13,7 @@ import PageHeader from '../../components/PageHeader';
 const ListPage = ({ match }) => {
     const {state, actions} = useStore();
     const [selectedTodo, setSelectedTodo] = useState(null);
+    const [sortBy , setSortBy] = useState('title');
     const path = match.path;
 
     const list = state.lists.find(list => list.id === match.params.listId) 
@@ -39,7 +40,7 @@ const ListPage = ({ match }) => {
     };
 
     const todos = match.params.listId ? getTodosByList(match.params.listId, state.todos) : getTodosByFilter[path](state.todos);
-    const sortedTodos = list.sort ?  todos.slice().sort(sortFn[list.sort]) : todos;
+    const sortedTodos = sortBy ?  todos.slice().sort(sortFn[sortBy]) : todos;
 
     useEffect(() => {
         setSelectedTodo(null);
@@ -65,8 +66,12 @@ const ListPage = ({ match }) => {
         setSelectedTodo(todo)
     }
 
+    
     const handleSortChange = (sort) => {
-        actions.updateList(list.id, { sort });
+        if(list.id) {
+            actions.updateList(list.id, { sort });
+        }
+        setSortBy(sort);
     }
 
     if(!list || !todos) return <Spinner/>

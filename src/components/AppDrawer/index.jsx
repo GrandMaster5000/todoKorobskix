@@ -121,7 +121,7 @@ const AppDrawer = ({lists}) => {
 
                     <Layout>
                         {isListFormOpen ?
-                            <form onSubmit={handleSubmit}>
+                            <form>
                                 <TextAreaLayout
                                     labelValue='Новая задача'
                                     value={listTitle}

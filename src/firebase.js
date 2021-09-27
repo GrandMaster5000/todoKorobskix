@@ -3,12 +3,12 @@ const firebase = require("firebase");
 require("firebase/firestore");
 
 firebase.initializeApp({
-    apiKey: "AIzaSyCM8LVafRLoXu9xX9aWebprFDutLoIGDi8",
-    authDomain: "react-todo-d2dac.firebaseapp.com",
-    projectId: "react-todo-d2dac",
-    storageBucket: "react-todo-d2dac.appspot.com",
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
     messagingSenderId: "786870825604",
-    appId: "1:786870825604:web:8d2fc926f9c5c79e7e08d1"
+    appId: process.env.REACT_APP_FIREBASE_APP_ID
 });
 
 const db = firebase.firestore();

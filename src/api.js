@@ -74,6 +74,7 @@ export function createList(data) {
 }
 
 export function updateList(listId, data) {
+  console.log(listId, data);
   return db.collection("lists").doc(listId).update({...data})
     .then(() => ({
       id: listId,
@@ -82,7 +83,7 @@ export function updateList(listId, data) {
 }
 
 export function deleteList(listId) {
-  return db.collection("todos").doc(listId).delete()
+  return db.collection("lists").doc(listId).delete()
   .then(() => listId);
 }
 
